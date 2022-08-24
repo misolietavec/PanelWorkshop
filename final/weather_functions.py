@@ -19,6 +19,7 @@ import requests
 from os import environ
 import os
 from datetime import datetime
+from sqlitedict import SqliteDict
 
 # %%
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -28,16 +29,24 @@ Stations_SK = pickle.load(picklefile)
 StaNames = sorted(list(Stations_SK.keys()))
 
 owkey =  environ["OWM_APIKEY"]
+db = SqliteDict("one_call.sqlite", autocommit=True, tablename='weather')
 
 
 # %%
-def one_call(city):
+def one_call(city, autoupdate=60*60*4):
     if not city in StaNames:
         raise ValueError("No such meteostation.")
-    lat, lon = Stations_SK[city]
-    URL = f"https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude=minutely,allerts&appid={owkey}&units=metric"
-    one_call_result = requests.get(URL)
-    return one_call_result.json()
+        
+    no_update =  city in db.keys() and (int(time()) - ref_time < autoupdate)  
+    if no_update:
+        ref_time, one_call_result = db[city]
+    else:
+        lat, lon = Stations_SK[city]
+        URL = f"https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude=minutely,allerts&appid={owkey}&units=metric"
+        one_call_result = requests.get(URL).json()
+        ref_time = one_call_result["current"]["dt"]
+        db[city] = (ref_time, one_call_result)
+    return one_call_result
 
 
 # %%
