@@ -39,4 +39,5 @@ wdata = get_weather(wdict)  # dictionary with current, hourly, daily weatherdata
 from final.plot_functions import plot_48h, plot_8d, plot_forecasts
 
 # %%
-figtemp = plot_8d(wdata,"pressure")
+figtemp = plot_forecasts(wdata, period="daily",values=["rain","temp","wind_speed"])
+figtemp

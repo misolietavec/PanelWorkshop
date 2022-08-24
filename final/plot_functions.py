@@ -65,4 +65,30 @@ def add_temp_traces(fig, wdata):
 
 # %%
 def plot_forecasts(wdata, period='hourly', values=["temp","rain"]):
-    pass
+    df = wdata[period]
+    nplots = len(values) 
+    fig = make_subplots(rows=nplots, cols=1, subplot_titles=values, vertical_spacing=0.09)
+
+    xval = df.index
+    for ind, val in enumerate(values):
+        nrow = ind + 1
+        if period == 'daily' and val == 'temp':
+            fig.add_trace(go.Bar(x=xval, y=df['day'],
+                                 marker_color='green', name='day'), row=nrow, col=1)
+            fig.add_trace(go.Bar(x=xval, y=df['night'],
+                                 marker_color='darkblue', name='night'), row=nrow, col=1)
+            fig.add_trace(go.Bar(x=xval, y=df['max'],
+                                 marker_color='red', name='max'), row=nrow, col=1)
+            fig.add_trace(go.Bar(x=xval, y=df['min'],
+                                 marker_color='blue', name='min'), row=nrow, col=1)
+        else:
+            plot_function = go.Bar if val == 'rain' else go.Scatter
+            fig.add_trace(plot_function(x=xval, y=df[val], marker_color=w_colors[val],
+                                        name=val), row=nrow, col=1)
+        if period == 'hourly':
+            fig.update_xaxes(dtick=60*60*1000*3, tickformat="%H\n%e.%b", row=nrow, col=1)
+        else:   # daily
+            fig.update_xaxes(dtick=60*60*1000*24, tickformat="%e.%b",
+                             ticklabelmode="period", row=nrow, col=1)
+    fig.update_layout(height=nplots * 250, width=1000, margin=dict(t=20, b=0, r=10, l=10), showlegend=False)
+    return fig    
