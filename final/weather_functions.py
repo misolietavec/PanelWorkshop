@@ -83,4 +83,4 @@ def get_daily(wdict):
 
 # %%
 def get_weather(wdict):
-    return get_current(wdict), get_hourly(wdict), get_daily(wdict)
+    return {"current": get_current(wdict), "hourly": get_hourly(wdict), "daily": get_daily(wdict)}
