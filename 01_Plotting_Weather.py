@@ -29,8 +29,14 @@ wdata = get_weather(wdict)  # dictionary with current, hourly, daily weatherdata
 
 # %%
 # wdata["hourly"][:10]
-wdata["daily"]
+# wdata["daily"]
 
 # %%
 # vo final/plot_functions budu implementovane plot_48h(wdata, val), plot_temp_8d(dtemp), plot_8d(wdata, val), plot_forecasts(wdata, values)
 # dtemp je wdata['daily']['temp'], values je zoznam meteovelicin, value je jedna velicina, import len plot_48h, plot_8d, plot_forecasts 
+
+# %%
+from final.plot_functions import plot_48h, plot_8d, plot_forecasts
+
+# %%
+figtemp = plot_8d(wdata,"pressure")
