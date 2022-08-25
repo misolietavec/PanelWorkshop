@@ -26,7 +26,6 @@ from time import time
 dir_path = os.path.dirname(os.path.realpath(__file__))
 picklefile = open(f"{dir_path}/data/stanice.pickle",'rb')
 Stations_SK = pickle.load(picklefile)
-# for convenience, alphabetically sorted names of meteostations
 StaNames = sorted(list(Stations_SK.keys()))
 
 owkey =  environ["OWM_APIKEY"]
@@ -92,5 +91,6 @@ def get_daily(wdict):
 
 
 # %%
-def get_weather(wdict):
+def get_weather(city):
+    wdict = one_call(city)
     return {"current": get_current(wdict), "hourly": get_hourly(wdict), "daily": get_daily(wdict)}
