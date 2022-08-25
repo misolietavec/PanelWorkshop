@@ -50,17 +50,16 @@ def plot_8d(wdata, val):
 
 
 # %%
-def add_temp_traces(fig, wdata):
+def add_temp_traces(fig, wdata, **kwargs):
     xval = wdata.index
     fig.add_trace(go.Bar(x=xval, y=wdata['day'],
-                  marker_color='green', name='day'))
+                  marker_color='green', name='day'),**kwargs)
     fig.add_trace(go.Bar(x=xval, y=wdata['night'],
-                  marker_color='darkblue', name='night'))
+                  marker_color='darkblue', name='night'),**kwargs)
     fig.add_trace(go.Bar(x=xval, y=wdata['max'],
-                  marker_color='red', name='max'))
+                  marker_color='red', name='max'),**kwargs)
     fig.add_trace(go.Bar(x=xval, y=wdata['min'],
-                  marker_color='blue', name='min'))
-    # return fig
+                  marker_color='blue', name='min'),**kwargs)
 
 
 # %%
@@ -73,14 +72,7 @@ def plot_forecasts(wdata, period='hourly', values=["temp","rain"]):
     for ind, val in enumerate(values):
         nrow = ind + 1
         if period == 'daily' and val == 'temp':
-            fig.add_trace(go.Bar(x=xval, y=df['day'],
-                                 marker_color='green', name='day'), row=nrow, col=1)
-            fig.add_trace(go.Bar(x=xval, y=df['night'],
-                                 marker_color='darkblue', name='night'), row=nrow, col=1)
-            fig.add_trace(go.Bar(x=xval, y=df['max'],
-                                 marker_color='red', name='max'), row=nrow, col=1)
-            fig.add_trace(go.Bar(x=xval, y=df['min'],
-                                 marker_color='blue', name='min'), row=nrow, col=1)
+            add_temp_traces(fig, df, row=nrow, col=1)
         else:
             plot_function = go.Bar if val == 'rain' else go.Scatter
             fig.add_trace(plot_function(x=xval, y=df[val], marker_color=w_colors[val],

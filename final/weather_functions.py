@@ -37,11 +37,11 @@ db = SqliteDict("one_call.sqlite", autocommit=True, tablename='weather')
 def one_call(city, autoupdate=60*60*4):
     if not city in StaNames:
         raise ValueError("No such meteostation.")
-        
-    no_update =  city in db.keys() and (int(time()) - ref_time < autoupdate)  
-    if no_update:
+    no_update = False
+    if city in db.keys():
         ref_time, one_call_result = db[city]
-    else:
+        no_update =  (int(time()) - ref_time < autoupdate)  
+    if not no_update:
         lat, lon = Stations_SK[city]
         URL = f"https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude=minutely,allerts&appid={owkey}&units=metric"
         one_call_result = requests.get(URL).json()
