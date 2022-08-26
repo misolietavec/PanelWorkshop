@@ -171,5 +171,3 @@ for val in values:
 # ### Iste sme si všimli, že podstatná časť kódu sa v horeuvedených funkciách opakuje. To nie je dobre.
 # ### Môžeme vytvoriť jedinú funkciu `plot_forecasts(wdata, period, values)`, ktorá zahrnie všetko, čo sme doteraz urobili. 
 # ### Pozrieme si to v notebooku v adresári `working` [nazvanom `plot_functions`](working/plot_functions.ipynb) 
-
-# %%

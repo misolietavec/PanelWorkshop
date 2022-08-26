@@ -95,5 +95,3 @@ first_date = datetime.fromtimestamp(first_hourly['dt'])
 
 # %% [markdown]
 # ### Inšpirovaní všetkým horeuvideným, editujeme v adresári ```working``` [pripravený notebook s názvom ```weather_functions```](working/weather_functions.ipynb) a budeme ho postupne napĺňať funkciami pre získanie aktuálneho počasia, predpovedí na 48 hodin a 8 dní.
-
-# %%
