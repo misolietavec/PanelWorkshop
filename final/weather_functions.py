@@ -29,7 +29,7 @@ Stations_SK = pickle.load(picklefile)
 StaNames = sorted(list(Stations_SK.keys()))
 
 owkey =  environ["OWM_APIKEY"]
-db = SqliteDict("one_call.sqlite", autocommit=True, tablename='weather')
+db = SqliteDict(f"{dir_path}/one_call.sqlite", autocommit=True, tablename='weather')
 
 
 # %%
