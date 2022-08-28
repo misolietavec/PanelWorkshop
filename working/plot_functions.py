@@ -16,6 +16,7 @@
 import panel as pn
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
+# import for map functions, will be added later
 # import folium
 # from folium import plugins
 # import json
@@ -26,7 +27,7 @@ import final.weather_functions as wf
 w_colors = {'clouds': 'green', 'rain': 'darkblue', 'wind_speed': 'blue', 'humidity': 'magenta', 'pressure': 'darkgray', 'temp': 'red'}
 fig_height, fig_width = 250, 800
 Stations = wf.Stations_SK
-# dir_path = os.path.dirname(os.path.realpath(__file__))
+
 
 # %%
 def plot_48h(wdata, val):
@@ -56,6 +57,7 @@ def plot_8d(wdata, val):
 
 # %%
 temp = {"day": "green", "night": "darkblue", "max": "red", "min": "blue"}
+
 def add_temp_traces(fig, daily, **kwargs):
     xval = daily.index
     for val in temp:
@@ -86,8 +88,9 @@ def plot_forecasts(wdata, period='hourly', values=["temp","rain"]):
     fig.update_layout(height=num_plots * fig_height, width=fig_width, showlegend=False)
     return fig    
 
-
 # %%
+# dir_path = os.path.dirname(os.path.realpath(__file__))
+
 # def slovakia_map():
 #     map_slovakia = folium.Map(location=[48.7, 19.6], zoom_start=8)
     
@@ -113,10 +116,3 @@ def plot_forecasts(wdata, period='hourly', values=["temp","rain"]):
 #     folium.CircleMarker(location=Stations[station], radius=15, color='red',
 #                         fill_color='red', fill=True).add_to(map)
 #     return map
-
-# %%
-wkeys = ['clouds', 'rain', 'wind_speed', 'humidity', 'pressure', 'temp']
-w_colors = dict(zip(wkeys,['green', 'darkblue', 'blue', 'magenta', 'darkgray', 'red']))
-w_colors
-
-# %%

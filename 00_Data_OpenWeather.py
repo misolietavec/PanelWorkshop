@@ -25,10 +25,6 @@ import pickle
 import json
 import pandas as pd  # for reading csv files as pandas DataFrame
 
-# %% [markdown]
-# ## Žiadne dáta nie sú perfektné. Pred použitím prečistiť... Prečo sme rezignovali na psie dáta?
-# ### Hovorme radšej o počasí :-)
-
 # %%
 # we begin with reading file with meteostations in Slovakia
 picklefile = open('final/data/stanice.pickle','rb')   # relative path; why binary?
@@ -41,8 +37,8 @@ StaNames = sorted(list(Stations_SK.keys()))
 # Stations_SK
 
 # %% [markdown]
-# #### Neskôr budeme často využívať dátovy typ  ```pandas DataFrame```. Dnes poobede sa môžete zúčastniť workshopu "Pandas watching movies", takže sa nebudeme venovať objasneniu tohto typu. Stačí vedieť, že:
-# #### pd.DataFrame je jednoducho tabuľka s pomenovanými stĺpcami a príp. indexovým stĺpcom, obsahujúcim pomenovania riadkov (pozorovaní).
+# ### Neskôr budeme často využívať dátovy typ  ```pandas DataFrame```. Dnes poobede sa môžete zúčastniť workshopu **Pandas watching movies**, takže sa nebudeme venovať objasneniu tohto typu. Stačí vedieť, že:
+# ### **pd.DataFrame je tabuľka s pomenovanými stĺpcami a  indexovým stĺpcom, (obsahujúcim pomenovania riadkov - pozorovaní).**
 
 # %%
 # making pd.Dataframe from Stations_SK dictionary, lat is zem. šírka, lon is zem. dĺžka, show this beautiful table
@@ -94,4 +90,4 @@ first_date = datetime.fromtimestamp(first_hourly['dt'])
 # print (f"default: {first_date}", f'our format: {first_date.strftime("%-d. %-m. %Y, %-H:%M")}',sep='\n')
 
 # %% [markdown]
-# ### Inšpirovaní všetkým horeuvideným, editujeme v adresári ```working``` [pripravený notebook s názvom ```weather_functions```](working/weather_functions.ipynb) a budeme ho postupne napĺňať funkciami pre získanie aktuálneho počasia, predpovedí na 48 hodin a 8 dní.
+# ### Inšpirovaní všetkým horeuvideným, editujeme v adresári ```working``` [pripravený notebook s názvom weather_functions](working/weather_functions.ipynb) a budeme ho postupne napĺňať funkciami pre získanie aktuálneho počasia, predpovedí na 48 hodin a 8 dní.

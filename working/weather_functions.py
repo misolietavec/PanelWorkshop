@@ -17,7 +17,6 @@ import pickle
 import pandas as pd
 import requests
 from os import environ
-import os
 from datetime import datetime
 
 # %%
@@ -54,21 +53,21 @@ def wkeys_dict(wrec):
     "helper function, returns datetime from weather record and also the dictionary only for keys in wkeys"
     wd = {}
     for key in wkeys:
-        wd[key] = wrec[key]  # beware rain!
+        wd[key] = wrec[key]  # beware rain, can be {}
     time = datetime.fromtimestamp(wres['dt'])    
     return time, wd    
 
 
 # %%
 # wkeys_dict(wdict['current'])
-# wkeys_dict(wdict['hourly'][0])
-# wkeys_dict(wdict['daily'][0])
+# wkeys_dict(wdict['hourly'][0])   # first item for hourly forecast
+# wkeys_dict(wdict['daily'][0])    # first item for daily forecast
 
 # %%
 def get_current(wdict):
     "returns pandas DataFrame with current weather - use pd.DataFrame.from_dict :-)"
     time, currdict = wkeys_dict(wdict['hourly'])
-    # add time to result...
+    # add time to currdict
     curr_DF = pd.DataFrame.from_dict(currdict, orient='index', columns=['Actual weather'])
 
 
@@ -81,7 +80,6 @@ def get_hourly(wdict):
     wh = {}
     for rec in wdict['hourly']:
         time, wd = wkeys_dict(rec)
-        # beware rain in hourly record
         wh[time] = wd  
         
     return pd.DataFrame.from_dict(wh, orient='index', columns=wkeys) # times as keys
@@ -98,10 +96,9 @@ def get_daily(wdict):
     wday = {}
     for rec in wdict['daily']:
         time, wd = wkeys_dict(rec)
-        # beware different temperatures in day    
+        # beware different temperatures in day, append tempkeys    
         wday[time] = wd
-    return pd.DataFrame.from_dict(wday, orient='index', columns=wkeys[:-1] + tempkeys)  
-    
+    return pd.DataFrame.from_dict(wday, orient='index', columns=wkeys[:-1] + tempkeys)
 
 
 # %%
