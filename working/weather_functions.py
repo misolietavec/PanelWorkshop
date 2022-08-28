@@ -23,7 +23,7 @@ from datetime import datetime
 picklefile = open("data/stanice.pickle",'rb')
 Stations_SK = pickle.load(picklefile)
 # for convenience, alphabetically sorted names of meteostations
-StaNames = sorted(list(Stations_SK.keys()))
+# StaNames = sorted(list(Stations_SK.keys()))
 
 owkey =  environ["OWM_APIKEY"]
 
@@ -40,7 +40,7 @@ def one_call(city):
 
 
 # %%
-# wdict = one_call("Prievidza")
+wdict = one_call("Prievidza")
 # print(f"daily item: {wdict['daily'][0]}", f"hourly item: {wdict['hourly'][0]}", f"current: {wdict['current']}", sep='\n\n')
 
 # %%
@@ -53,8 +53,8 @@ def wkeys_dict(wrec):
     "helper function, returns datetime from weather record and also the dictionary only for keys in wkeys"
     wd = {}
     for key in wkeys:
-        wd[key] = wrec[key]  # beware rain, can be {}
-    time = datetime.fromtimestamp(wres['dt'])    
+        wd[key] = wrec[key] # if wrec.get(key) else 0  # beware "rain" key, can be missing
+    time = datetime.fromtimestamp(wrec['dt'])    
     return time, wd    
 
 
@@ -66,9 +66,10 @@ def wkeys_dict(wrec):
 # %%
 def get_current(wdict):
     "returns pandas DataFrame with current weather - use pd.DataFrame.from_dict :-)"
-    time, currdict = wkeys_dict(wdict['hourly'])
-    # add time to currdict
+    time, currdict = wkeys_dict(wdict['current'])
+    # currdict['time'] = time # add time to currdict
     curr_DF = pd.DataFrame.from_dict(currdict, orient='index', columns=['Actual weather'])
+    return curr_DF
 
 
 # %%
@@ -80,8 +81,10 @@ def get_hourly(wdict):
     wh = {}
     for rec in wdict['hourly']:
         time, wd = wkeys_dict(rec)
-        wh[time] = wd  
-        
+        # if type(wd['rain']) is dict:
+        #     wd['rain'] = wd['rain']['1h']
+        wh[time] = wd
+
     return pd.DataFrame.from_dict(wh, orient='index', columns=wkeys) # times as keys
 
 
@@ -96,9 +99,11 @@ def get_daily(wdict):
     wday = {}
     for rec in wdict['daily']:
         time, wd = wkeys_dict(rec)
-        # beware different temperatures in day, append tempkeys    
+        # add keys from tempkeys    
+        # for key in tempkeys:
+        #     wd[key] = wd['temp'][key]
         wday[time] = wd
-    return pd.DataFrame.from_dict(wday, orient='index', columns=wkeys[:-1] + tempkeys)
+    return pd.DataFrame.from_dict(wday, orient='index', columns=wkeys) # [:-1] + tempkeys)
 
 
 # %%
