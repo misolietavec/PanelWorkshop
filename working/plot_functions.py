@@ -24,7 +24,8 @@ from plotly.subplots import make_subplots
 import final.weather_functions as wf
 
 # %%
-w_colors = {'clouds': 'green', 'rain': 'darkblue', 'wind_speed': 'blue', 'humidity': 'magenta', 'pressure': 'darkgray', 'temp': 'red'}
+w_colors = {'clouds': 'green', 'rain': 'darkblue', 'wind_speed': 'blue', 
+            'humidity': 'magenta', 'pressure': 'darkgray', 'temp': 'red'}
 fig_height, fig_width = 250, 800
 Stations = wf.Stations_SK
 
@@ -41,6 +42,16 @@ def plot_48h(wdata, val):
 
 
 # %%
+temp = {"day": "green", "night": "darkblue", "max": "red", "min": "blue"}
+
+# as in 01_Plotting Weather, but only adds traces to existing Figure fig, which we make with plot_8d
+def add_temp_traces(fig, daily, **kwargs):
+    xval = daily.index
+    for val in temp:
+        fig.add_trace(go.Bar(x=xval, y=daily[val], marker_color=temp[val], name=val), **kwargs)
+
+
+# %%
 def plot_8d(wdata, val):
     df = wdata["daily"]
     fig = go.Figure()
@@ -48,20 +59,11 @@ def plot_8d(wdata, val):
     if val != "temp":
         fig.add_trace(plot_function(x=df.index, y=df[val], marker_color=w_colors[val], name=val))
     else:
-        add_temp_traces(fig, df)  # as in 01_Plotting Weather, but only adds traces to existing Figure fig
+        add_temp_traces(fig, df)  # add traces for temperatures throughout the day
     fig.update_xaxes(dtick=60*60*1000*24, tickformat="%e.%b",
                      ticklabelmode="period")
     fig.update_layout(height=fig_height, width=fig_width, margin=dict(t=20, b=0, r=10, l=10), showlegend=False)
     return fig
-
-
-# %%
-temp = {"day": "green", "night": "darkblue", "max": "red", "min": "blue"}
-
-def add_temp_traces(fig, daily, **kwargs):
-    xval = daily.index
-    for val in temp:
-        fig.add_trace(go.Bar(x=xval, y=daily[val], marker_color=temp[val], name=val), **kwargs)
 
 
 # %%

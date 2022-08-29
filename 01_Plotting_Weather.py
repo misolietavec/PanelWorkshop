@@ -20,7 +20,6 @@ from final.weather_functions import StaNames, get_weather
 # all graphics will be tested on the data for one meteostation, choose from StaNames
 station = "Oravská Lesná"
 wdata = get_weather(station)   # dictionary with current, hourly, daily weatherdata
-# hourly, daily, current = wdata["hourly"], wdata["daily"], wdata["current"]
 
 # %%
 # to neatly display all data in cell, not only last row - Jupyter is the true child of IPython notebook :-)
@@ -41,6 +40,7 @@ from plotly.subplots import make_subplots  # we will use several plots "in colum
 # %%
 # minimal example - display temperature or another meteodata forecast for next 48 hours
 df = wdata["hourly"]    # pd.DataFrame with hourly meteodata; no need to import pandas in this NB
+# always we have the values of independent variable x (type datetime.datetime) and the dependent variable, y
 val = "temp" # can change
 # print(df[val].index[:10], df[val].values[:10], sep="\n\n")
 xval = df[val].index
@@ -49,21 +49,23 @@ if False:  # set to True for graphics
     fig = go.Figure()    # empty graphics "window" with default parameters
     temp_graph = go.Scatter(x=xval, y=yval)
     fig.add_trace(temp_graph)
+    # beautifying the plot - ticks every 3 hours, format: hour, \n short name of month, day of month
     # fig.update_xaxes(dtick=60*60*1000*3, tickformat="%H\n%e. %b")  # time in milliseconds; for formatting, remember strftime? 
     # we get tooltips and tools "for free", try it
     display(fig)    
 
 
 # %%
-# fig.update_xaxes? # but what properties we can update?
-# go.layout.XAxis?  # we want ticks every 3 hours, this is the dticks property, tickformat is how to display them - see strftime
+# # go.layout.XAxis?
+# overwhelming number of options - RTFM https://plotly.com/python/reference/layout/xaxis/ :)
+# we want ticks every 3 hours, this is the dtick property, tickformat is how to display them - see strftime
 
 # %% [markdown]
 # ### Stačí dať dohromady, čo sme si vyskúšali a máme funkciu `plot_48h` pre vykreslenie teploty, ale aj iných veličín v hodinovej predpovedi.
 
 # %%
 # what walues we have for plotting in hourly forecast?
-# print(list(df.columns), wkeys, sep="\n")
+# print(list(df.columns))
 
 # %%
 def plot_48h(wdata, val):
@@ -89,7 +91,6 @@ def plot_48h(wdata, val):
 # %%
 # let us try to plot same "daily" value, e. g. clouds; similarly to hourly example above
 df = wdata["daily"]    # pd.DataFrame with daily meteodata; no need to import pandas in this NB
-print(list(df.columns))
 val = "clouds"   # change for day, rain, ...
 xval = df[val].index
 yval = df[val]
@@ -98,6 +99,7 @@ if False:      # set to True for graphics
     plot_function = go.Scatter # change for go.Bar
     val_graph = plot_function(x=xval, y=yval,)  # marker_color = "MidnightBlue")
     fig.add_trace(val_graph)
+    # ticklabels are not at the center of days, midday
     # fig.update_xaxes(tickformat="%e. %b",) # ticklabelmode="period") 
     display(fig)
 
@@ -121,7 +123,7 @@ def plot_8d(wdata, val):
 
 # %%
 # plot_8d(wdata, "facina")
-plot_8d(wdata, "max")
+# plot_8d(wdata, "max")
 
 # %% [markdown]
 # ### Chceli by sme mať všetky údaje o teplote (`day, night, max, min`) v jednom grafe. 
@@ -148,7 +150,7 @@ def plot_dailytemps(wdata):
 
 # %% [markdown]
 # ### Nakoniec, chceli by sme zobraziť niekoľko grafov pre rôzne veličiny pod sebou (podobne, ako je to na SHMU). 
-# ### To sa dá, ak namiesto `Figure` použijeme `make_subplots` (vráti viac podgrafov v jednom "okne", usporiadaných v "gride").
+# ### To sa dá, ak namiesto `Figure` použijeme `make_subplots` (vráti viac podgrafov v jednom "okne", usporiadaných v "gride", počet riadkov je `rows`, počet stĺpcov `cols`).
 
 # %%
 ## let us plot hourly values for temperature and humidity
