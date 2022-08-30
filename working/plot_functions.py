@@ -34,7 +34,7 @@ Stations = wf.Stations_SK
 def plot_48h(wdata, val):
     df = wdata['hourly']
     fig = go.Figure()
-    plot_function = go.Bar if val == 'rain' else go.Scatter  # this is different from 01_Plotting Weather, why?
+    plot_function = go.Bar if val == 'rain' else go.Scatter  # this is different from 01_Plotting Weather
     fig.add_trace(plot_function(x=df.index, y=df[val], marker_color=w_colors[val], name=val))
     fig.update_xaxes(dtick=60*60*1000*3, tickformat="%H\n%e.%b")
     fig.update_layout(height=fig_height, width=fig_width)   # plot width and height
@@ -45,7 +45,7 @@ def plot_48h(wdata, val):
 temp = {"day": "green", "night": "darkblue", "max": "red", "min": "blue"}
 
 # as in 01_Plotting Weather, but only adds traces to existing Figure fig, which we make with plot_8d
-def add_temp_traces(fig, daily, **kwargs):
+def add_temp_traces(fig, daily, **kwargs):   # **kwargs - variable number of named arguments
     xval = daily.index
     for val in temp:
         fig.add_trace(go.Bar(x=xval, y=daily[val], marker_color=temp[val], name=val), **kwargs)
@@ -62,7 +62,7 @@ def plot_8d(wdata, val):
         add_temp_traces(fig, df)  # add traces for temperatures throughout the day
     fig.update_xaxes(dtick=60*60*1000*24, tickformat="%e.%b",
                      ticklabelmode="period")
-    fig.update_layout(height=fig_height, width=fig_width, margin=dict(t=20, b=0, r=10, l=10), showlegend=False)
+    fig.update_layout(height=fig_height, width=fig_width, showlegend=False)
     return fig
 
 
@@ -72,7 +72,7 @@ def plot_8d(wdata, val):
 def plot_forecasts(wdata, period='hourly', values=["temp","rain"]):
     df = wdata[period]
     num_plots = len(values) 
-    fig = make_subplots(rows=num_plots, cols=1, subplot_titles=values, vertical_spacing=0.09)
+    fig = make_subplots(rows=num_plots, cols=1, subplot_titles=values)
 
     xval = df.index
     for ind, val in enumerate(values):

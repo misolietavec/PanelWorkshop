@@ -50,10 +50,9 @@ if False:  # set to True for graphics
     temp_graph = go.Scatter(x=xval, y=yval)
     fig.add_trace(temp_graph)
     # beautifying the plot - ticks every 3 hours, format: hour, \n short name of month, day of month
-    # fig.update_xaxes(dtick=60*60*1000*3, tickformat="%H\n%e. %b")  # time in milliseconds; for formatting, remember strftime? 
+    fig.update_xaxes(dtick=60*60*1000*3, tickformat="%H\n%e. %b")  # time in milliseconds; for formatting, remember strftime? 
     # we get tooltips and tools "for free", try it
-    display(fig)    
-
+    display(fig)   
 
 # %%
 # # go.layout.XAxis?
@@ -65,7 +64,8 @@ if False:  # set to True for graphics
 
 # %%
 # what walues we have for plotting in hourly forecast?
-# print(list(df.columns))
+print(list(df.columns))
+
 
 # %%
 def plot_48h(wdata, val):
@@ -83,7 +83,7 @@ def plot_48h(wdata, val):
 
 # %%
 # plot_48h(wdata, "zrazky")
-# plot_48h(wdata, "temp")   # try "rain", ...
+# plot_48h(wdata, "clouds")   # try "rain", ...
 
 # %% [markdown]
 # ### Denná predpoveď (`daily`) sa líši časovým rozsahom a tým, že nie je len jedna teplota (`temp`), ale niekoľko (`max, min, day, night`, ...).
@@ -96,11 +96,11 @@ xval = df[val].index
 yval = df[val]
 if False:      # set to True for graphics
     fig = go.Figure()    # empty graphics "window" with default parameters
-    plot_function = go.Scatter # change for go.Bar
+    plot_function = go.Bar # change for go.Bar
     val_graph = plot_function(x=xval, y=yval,)  # marker_color = "MidnightBlue")
     fig.add_trace(val_graph)
     # ticklabels are not at the center of days, midday
-    # fig.update_xaxes(tickformat="%e. %b",) # ticklabelmode="period") 
+    fig.update_xaxes(tickformat="%e. %b", ticklabelmode="period") 
     display(fig)
 
 
@@ -165,9 +165,9 @@ for val in values:
     val_graph = go.Scatter(x=xval, y=yval)
     fig.add_trace(val_graph, row=act_row, col=1)
     fig.update_xaxes(dtick=60*60*1000*3, tickformat="%H\n%e. %b")
-    # act_row += 1 
-# fig.update_layout(height=num_plots * 250, width=1000, showlegend=False) 
-# display(fig)
+    act_row += 1 
+fig.update_layout(height=num_plots * 250, width=1000, showlegend=False) 
+display(fig)
 
 # %% [markdown]
 # ### Iste sme si všimli, že podstatná časť kódu sa v horeuvedených funkciách opakuje. To nie je dobre.

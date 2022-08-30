@@ -23,7 +23,8 @@ import os
 import final.weather_functions as wf
 
 # %%
-w_colors = {'clouds': 'green', 'rain': 'darkblue', 'wind_speed': 'blue', 'humidity': 'magenta', 'pressure': 'darkgray', 'temp': 'red'}
+w_colors = {'clouds': 'green', 'rain': 'darkblue', 'wind_speed': 'blue', 
+            'humidity': 'magenta', 'pressure': 'darkgray', 'temp': 'red'}
 fig_height, fig_width = 250, 800
 Stations = wf.Stations_SK
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -36,7 +37,7 @@ def plot_48h(wdata, val):
     plot_function = go.Bar if val == 'rain' else go.Scatter
     fig.add_trace(plot_function(x=df.index, y=df[val], marker_color=w_colors[val], name=val))
     fig.update_xaxes(dtick=60*60*1000*3, tickformat="%H\n%e.%b")
-    fig.update_layout(height=fig_height, width=fig_width, margin=dict(t=20, b=0, r=10, l=10), showlegend=False)
+    fig.update_layout(height=fig_height, width=fig_width, showlegend=False)
     return fig
 
 
@@ -67,7 +68,7 @@ def add_temp_traces(fig, daily, **kwargs):
 def plot_forecasts(wdata, period='hourly', values=["temp","rain"]):
     df = wdata[period]
     nplots = len(values) 
-    fig = make_subplots(rows=nplots, cols=1, subplot_titles=values, vertical_spacing=0.09)
+    fig = make_subplots(rows=nplots, cols=1, subplot_titles=values)
 
     xval = df.index
     for ind, val in enumerate(values):
@@ -82,7 +83,7 @@ def plot_forecasts(wdata, period='hourly', values=["temp","rain"]):
             fig.update_xaxes(dtick=60*60*1000*3, tickformat="%H\n%e.%b", row=nrow, col=1)
         else:   # daily
             fig.update_xaxes(tickformat="%e.%b", ticklabelmode="period", row=nrow, col=1)
-    fig.update_layout(height=nplots * fig_height, width=fig_width, margin=dict(t=20, b=0, r=10, l=10), showlegend=False)
+    fig.update_layout(height=nplots * fig_height, width=fig_width, showlegend=False)
     return fig    
 
 

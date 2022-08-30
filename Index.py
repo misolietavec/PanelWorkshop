@@ -15,7 +15,14 @@
 # %% [markdown]
 # ### <a href="00_Data_OpenWeather.ipynb">Získanie a spracovanie dát zo stránky OpenWeather</a>
 
-# %% [markdown]
-# ### <a href="01_Plotting_weather.ipynb">Prvé obrázky získaných dát.</a>
+# %% [markdown] tags=[] jp-MarkdownHeadingCollapsed=true
+# ### <a href="01_Plotting_Weather.ipynb">Prvé obrázky získaných dát.</a>
 
-# %%
+# %% [markdown]
+# ### <a href="02_Panel_OneStationPlots.ipynb">Panel - výber meteostanice, grafy pre jednu stanicu.</a>
+
+# %% [markdown]
+# ### <a href="03_Panel_ChooseMeteodata.ipynb">Panel - výber stanice a meteoveličín, grafy.</a>
+
+# %% [markdown]
+#
