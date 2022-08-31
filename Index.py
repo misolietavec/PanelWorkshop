@@ -19,10 +19,13 @@
 # ### <a href="01_Plotting_Weather.ipynb">Prvé obrázky získaných dát.</a>
 
 # %% [markdown]
-# ### <a href="02_Panel_OneStationPlots.ipynb">Panel - výber meteostanice, grafy pre jednu stanicu.</a>
+# ### <a href="02_Panel_OneStationPlots.ipynb">`Panel` - výber meteostanice, grafy pre jednu stanicu.</a>
 
 # %% [markdown]
-# ### <a href="03_Panel_ChooseMeteodata.ipynb">Panel - výber stanice a meteoveličín, grafy.</a>
+# ### <a href="03_Panel_ChooseMeteodata.ipynb">`Panel` - výber stanice a meteoveličín, grafy.</a>
+
+# %% [markdown]
+# ### <a href="04_Panel_Weatherapp.ipynb">Meteostanice na mape, definitívna `panel` aplikácia.</a>
 
 # %% [markdown]
 #

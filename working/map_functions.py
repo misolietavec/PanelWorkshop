@@ -17,6 +17,10 @@ import panel as pn
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
+# import for map functions
+import folium
+from folium import plugins
+
 import final.weather_functions as wf
 
 # %%
@@ -85,3 +89,27 @@ def plot_forecasts(wdata, period='hourly', values=["temp","rain"]):
             fig.update_xaxes(tickformat="%e.%b", ticklabelmode="period", row=nrow, col=1)
     fig.update_layout(height=num_plots * fig_height, width=fig_width, showlegend=False)
     return fig    
+
+
+# %%
+# Mapping functions added
+
+def slovakia_map():
+    map_SK = folium.Map(location=[48.7, 19.6], zoom_start=8)
+    loc, pops = [], []
+    for name in Stations:
+        location = Stations[name]
+        poptext = f"{name}"
+        loc.append(location)
+        pops.append(poptext)
+
+    plugins.MarkerCluster(locations=loc, popups=pops).add_to(map_SK)    
+    return map_SK
+
+
+# %%
+def choosen_onmap(station):
+    map = slovakia_map()
+    folium.CircleMarker(location=Stations[station], radius=15, color='red',
+                         fill_color='red', fill=True).add_to(map)
+    return map
