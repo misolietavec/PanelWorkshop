@@ -25,6 +25,9 @@
 # ### <a href="03_Panel_ChooseMeteodata.ipynb">`Panel` - výber stanice a meteoveličín, grafy.</a>
 
 # %% [markdown]
+# ### <a href="04_Panel_AllForecasts">`Panel` - výber typu dát</a>
+
+# %% [markdown]
 # ### <a href="04_Panel_Weatherapp.ipynb">Meteostanice na mape, definitívna `panel` aplikácia.</a>
 
 # %% [markdown]
