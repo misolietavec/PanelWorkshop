@@ -71,6 +71,26 @@ tabs
 
 
 # %% [markdown]
+# #### Aj s `Tabs` môžeme odchytávať udalosti
+
+# %%
+def print_observ(*events):
+    for event in events:
+        active_tab = event.new
+        if active_tab == 0:
+            print("Observing hourly forecast")
+        else:
+            print("Observing daily forecast")
+
+            
+# now we do not want 'value' , we want 'active'
+tabs_watcher = tabs.param.watch(print_observ, 'active', onlychanged=True)
+
+# %%
+tabs.param.unwatch(tabs_watcher)
+
+
+# %% [markdown]
 # #### A ešte aby sme nezabudli na aktuálne počasie
 
 # %%
