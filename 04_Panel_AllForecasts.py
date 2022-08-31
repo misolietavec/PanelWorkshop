@@ -6,7 +6,7 @@ from final.plot_functions import plot_forecasts
 pn.extension('plotly')
 
 # %% [markdown]
-# #### Požičané z notebooku 03_Panel_ChooseMeteodata
+# #### Požičané z notebooku <a href="03_Panel_ChooseMeteodata.ipynb">03_Panel_ChooseMeteodata</a>
 
 # %%
 observ_choice = pn.widgets.CheckBoxGroup(options=wkeys, value=['temp', 'clouds'], width=200)
