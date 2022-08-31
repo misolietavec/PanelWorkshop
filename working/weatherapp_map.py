@@ -80,6 +80,9 @@ widgets = pn.Column(pn.Row(station_choice, width=250), pn.Row(restriction), obse
 apptitle = pn.pane.Markdown("## Počasie na Slovensku<br/>", align='center')
 
 # %%
+observ_choice.disabled
+
+# %%
 tabs = pn.Tabs(("Predpoveď 48 hod.", pn.Column(view_hourly)), ("Predpoveď 8 dní", pn.Column(view_daily)),
                ("Stanice na mape", pn.Column(view_map, width=1000,height=600)), dynamic=True, tabs_location="above")
 
@@ -89,12 +92,7 @@ def enable_observ(*events):
     for event in events:
         active_tab = event.new
         if active_tab == 2:
-            widgets.objects[1][0] = pn.pane.Markdown(" ")
-            widgets.objects[2][0] = pn.Row(pn.pane.Markdown("<center><h3>Nemeriame, ukazujeme</h3></center>",
-                                                            width=240, height=110, align="center"))
-        else:
-            widgets.objects[1][0] = restriction
-            widgets.objects[2][0] = pn.Row(observ_choice, width=250)
+            observ_choice.disabled = True
 
 tabs_watcher = tabs.param.watch(enable_observ, 'active', onlychanged=True)
 
