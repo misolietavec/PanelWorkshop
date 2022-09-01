@@ -22,6 +22,7 @@ from final.plot_functions import plot_forecasts
 pn.extension('plotly')
 
 # %%
+# in case we want our observations to be more fancy
 observations = {"Teplota": "temp", "Tlak": "pressure", "Oblaky": "clouds", 
                 "Vietor": "wind", "Zrážky": "rain", "Vlhkosť": "humidity"}
 
@@ -64,16 +65,15 @@ def view_daily(station_choice, observ_choice):
 
 
 # %%
-@pn.depends(station_choice)
-def view_map(station_choice):
-    return pn.pane.plot.Folium(choosen_onmap(station_choice), width=1000, height=600)
-
-
-# %%
 observe_row = pn.Row(observ_choice, width=250, align='center')
 restriction = pn.pane.Markdown("<b>Najviac tri veličiny</b>")
-widgets = pn.Column(pn.Row(station_choice, width=250), pn.Row(restriction), observe_row, pn.Row(view_current), align='center')
-apptitle = pn.pane.Markdown("## Počasie na Slovensku<br/>", align='center')
+widgets = pn.Column(
+    pn.Row(station_choice, width=250), 
+    pn.Row(restriction), 
+    observe_row, 
+    pn.Row(view_current), 
+    align='center'
+)
 
 # %%
 tabs = pn.Tabs(("Predpoveď 48 hod.", pn.Column(view_hourly)), 
@@ -81,7 +81,8 @@ tabs = pn.Tabs(("Predpoveď 48 hod.", pn.Column(view_hourly)),
                dynamic=True, tabs_location="above")
 
 # %%
-weather_info = pn.Column(apptitle,tabs)
+apptitle = pn.pane.Markdown("## Počasie na Slovensku<br/>", align='center')
+weather_info = pn.Column(apptitle, tabs)
 app = pn.Column(pn.Row(widgets, 
                 pn.Spacer(width=20),
                 weather_info)).servable(title="Počasie na Slovensku")
