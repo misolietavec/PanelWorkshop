@@ -68,6 +68,7 @@ def get_current(wdict):
     "returns pandas DataFrame with current weather - use pd.DataFrame.from_dict :-)"
     time, currdict = wkeys_dict(wdict['current'])
     # currdict['time'] = time # add time to currdict
+    # currdict['time'] = time.strftime("%-d.%b %H:%M")  # better format
     curr_DF = pd.DataFrame.from_dict(currdict, orient='index', columns=['Actual weather'])
     return curr_DF
 

@@ -62,7 +62,7 @@ def wkeys_dict(wdict):
 # %%
 def get_current(wdict):
     time, wd = wkeys_dict(wdict["current"])
-    wd['time'] = time
+    wd['time'] = time.strftime("%-d.%b %H:%M")
     return pd.DataFrame.from_dict(wd, orient='index',columns=['Aktuálne počasie'])
 
 

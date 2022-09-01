@@ -28,13 +28,15 @@ def view_hourly(station_choice, observ_choice):
     return fig
 
 
-options = pn.Column(station_choice, observ_choice)
-pn.Row(options, view_hourly)
+m_options = pn.Column(station_choice, observ_choice)
 
+
+# %%
+# pn.Row(m_options, view_hourly)
 
 # %% [markdown]
 # #### Teraz by sme chceli zobraziť merania na nasledujúci týždeň
-# #### Vďaka plot_forecasts to ľahko hravo vyriešiť
+# #### Vďaka `plot_forecasts` to môžeme hravo vyriešiť
 
 # %%
 @pn.depends(station_choice, observ_choice)
@@ -46,7 +48,7 @@ def view_daily(station_choice, observ_choice):
 
 # %%
 # we will use the same widgets for choosing station & observations
-pn.Row(options, view_daily)
+# pn.Row(m_options, view_daily)
 
 # %% [markdown]
 # #### Keďže zdieľame widgety pre hodinové aj denné zobrazenia, tak ak zmeníme napr. denné merania, zmenia sa aj hodinové, a naopak
@@ -57,7 +59,7 @@ pn.Row(options, view_daily)
 
 # %%
 # we define each tab with a tuple (tab name, widget to display)
-# we can also define a with only a widget - panel gives it a name (but it is ugly)
+# we can also define tab with only a widget - panel gives it a name (but it is ugly)
 
 tabs = pn.Tabs(
     ("Hourly", view_hourly),
@@ -67,11 +69,12 @@ tabs = pn.Tabs(
     tabs_location='above'  # options: 'left', 'right', 'above'
 )
 
-tabs
 
+# %%
+# tabs
 
 # %% [markdown]
-# #### Aj s `Tabs` môžeme odchytávať udalosti
+# #### Aj s `Tabs` môžeme odchytávať udalosti, budeme to využívať v nasledujúcom notebooku.
 
 # %%
 def print_observ(*events):
@@ -102,14 +105,12 @@ def view_current(station_choice):
 
 
 # %%
-widgets = pn.Column(options, view_current)
-widgets
+widgets = pn.Column(m_options, view_current)
+# widgets
 
 # %% [markdown]
 # #### A nakoniec to spojiť dokopy
 
 # %%
 app = pn.Row(widgets, tabs)
-app
-
-# %%
+# app
