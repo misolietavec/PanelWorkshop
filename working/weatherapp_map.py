@@ -20,23 +20,22 @@ import panel as pn
 import panel.widgets as pnw
 
 from plotly.subplots import make_subplots
-from final.weather_functions import get_weather, StaNames
+from final.weather_functions import get_weather, StaNames, sk_wkeys
 from final.plot_functions import plot_forecasts, choosen_onmap
 
 pn.extension('plotly')
 
 # %%
-observations = {"Teplota": "temp", "Tlak": "pressure", "Oblaky": "clouds", 
-                "Vietor": "wind", "Zrážky": "rain", "Vlhkosť": "humidity"}
-
-MAX_SELECTED_VALUES = 3
+# titles and labels will be in slovak, values are the wkeys 
+# sk_wkeys
 
 # %%
 station_choice = pnw.Select(options=list(StaNames), value="Bratislava")
-observ_choice = pnw.CheckBoxGroup(options=observations, value=["temp","rain"])
-
+observ_choice = pnw.CheckBoxGroup(options=sk_wkeys, value=["temp","rain"])
 
 # %%
+MAX_SELECTED_VALUES = 3
+
 def set_observ(*events):
     for event in events:
         if event.type == "changed" and len(event.new) > MAX_SELECTED_VALUES:
@@ -80,7 +79,7 @@ widgets = pn.Column(pn.Row(station_choice, width=250), pn.Row(restriction), obse
 apptitle = pn.pane.Markdown("## Počasie na Slovensku<br/>", align='center')
 
 # %%
-observ_choice.disabled
+# observ_choice.disabled
 
 # %%
 tabs = pn.Tabs(("Predpoveď 48 hod.", pn.Column(view_hourly)), ("Predpoveď 8 dní", pn.Column(view_daily)),

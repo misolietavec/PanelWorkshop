@@ -4,4 +4,4 @@
 03_Panel_ChooseMeteodata   (stanica_vyber, merania_vyber, len 48 hod., obmedzenie na 3 polozky)
 04_Panel_AllForecasts      (pridat taby, pre 48 hod a 8 dni, current pod widgets)
 05_WeatherMap              (vsetky a vybrana stanica na mape, novy tab)
-06_CleaningCode            (funkcie priblizime k nasim, perzistencia, len ak ostane cas)
+06_CodeDetails             (funkcie priblizime k nasim, perzistencia, len ak ostane cas)

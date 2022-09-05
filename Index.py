@@ -28,7 +28,7 @@
 # ### <a href="04_Panel_AllForecasts.ipynb">`Panel` - výber typu dát</a>
 
 # %% [markdown]
-# ### <a href="04_Panel_Weatherapp.ipynb">Meteostanice na mape, definitívna `panel` aplikácia.</a>
+# ### Meteostanice na mape. <a href="05_WeatherMap.ipynb">Definitívna `panel` aplikácia.</a>
 
 # %% [markdown]
-#
+# ### <a href="06_CodeDetails.ipynb">Doplňujúce podrobnosti, odkazy  na materiály</a>
