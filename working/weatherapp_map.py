@@ -38,7 +38,7 @@ MAX_SELECTED_VALUES = 3
 
 def set_observ(*events):
     for event in events:
-        if event.type == "changed" and len(event.new) > MAX_SELECTED_VALUES:
+        if event.type == "changed" and (len(event.new) > MAX_SELECTED_VALUES or len(event.new) == 0):
             observ_choice.value = event.old
             
 observ_watcher = observ_choice.param.watch(set_observ, ['value'], onlychanged=True) 
