@@ -4,7 +4,7 @@ from final.weather_functions import get_weather, StaNames
 from final.plot_functions import plot_forecasts
 
 # Displaying Panel objects in the notebook requires the panel extension to be loaded
-pn.extension()
+# pn.extension()
 
 # %%
 select_station = pn.widgets.Select(name="Choose a station", 
@@ -91,3 +91,5 @@ def view_hourly_trh(select_station):
 
 # %%
 pn.Column(select_station, view_hourly_trh)
+
+# %%

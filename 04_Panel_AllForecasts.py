@@ -13,7 +13,7 @@ observ_choice = pn.widgets.CheckBoxGroup(options=wkeys, value=['temp', 'clouds']
 
 def set_observ(*events):  
     for event in events:
-        if event.type == "changed" and len(event.new) > 3:
+        if event.type == "changed" and(len(event.new) > 3 or len(event.new) == 0):
             observ_choice.value = event.old
             
 observ_watcher = observ_choice.param.watch(set_observ, ['value'], onlychanged=True)
