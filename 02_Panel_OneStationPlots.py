@@ -1,7 +1,7 @@
 # %%
 import panel as pn
 from final.weather_functions import get_weather, StaNames
-from final.plot_functions import plot_forecasts, plot_8d
+from final.plot_functions import plot_forecasts
 
 # Displaying Panel objects in the notebook requires the panel extension to be loaded
 pn.extension()
@@ -23,7 +23,7 @@ select_station.value
 select_station.value = "Košice"
 
 # %%
-station_name = pn.widgets.TextInput(name="Chosen station", disabled=True,width=250)
+station_name = pn.widgets.TextInput(name="Chosen station", disabled=True, width=250)
 station_name
 
 # %% [markdown]
@@ -51,6 +51,7 @@ def update_station_name(select_station):
 
 
 # %%
+# don't forget to include the function in the column with other widgets
 col = pn.Column(select_station, station_name, update_station_name)
 col
 
@@ -66,7 +67,6 @@ print("\nDruhý objekt: ", col[1]) # col.objects[1]
 # ### Zobrazovanie grafov
 
 # %%
-# ukazat najprv bez extension, aby sa vypisala chyba a nefungovali grafy
 # pn.extension('plotly')
 
 # %%
