@@ -47,6 +47,10 @@ wdict = one_call("Prievidza")
 # we will be interested only in values for certain keys:
 wkeys = ['clouds', 'rain', 'wind_speed', 'humidity', 'pressure', 'temp']
 
+# dictionary, from slovak terms to wkeys values, will use in final application 
+sk_wkeys = {"Teplota": "temp", "Tlak": "pressure", "Oblaky": "clouds", 
+                "Vietor": "wind", "Zrážky": "rain", "Vlhkosť": "humidity"}
+
 
 # %%
 def wkeys_dict(wrec):

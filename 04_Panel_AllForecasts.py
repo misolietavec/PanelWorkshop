@@ -30,12 +30,12 @@ def view_hourly(station_choice, observ_choice):
 
 m_options = pn.Column(station_choice, observ_choice)
 
-
 # %%
-# pn.Row(m_options, view_hourly)
+pn.Row(m_options, view_hourly)
+
 
 # %% [markdown]
-# #### Teraz by sme chceli zobraziť merania na nasledujúci týždeň
+# #### Teraz by sme chceli zobraziť merania na nasledujúcich 8 dní
 # #### Vďaka `plot_forecasts` to môžeme hravo vyriešiť
 
 # %%
@@ -48,7 +48,7 @@ def view_daily(station_choice, observ_choice):
 
 # %%
 # we will use the same widgets for choosing station & observations
-# pn.Row(m_options, view_daily)
+pn.Row(m_options, view_daily)
 
 # %% [markdown]
 # #### Keďže zdieľame widgety pre hodinové aj denné zobrazenia, tak ak zmeníme napr. denné merania, zmenia sa aj hodinové, a naopak
@@ -69,9 +69,9 @@ tabs = pn.Tabs(
     tabs_location='above'  # options: 'left', 'right', 'above'
 )
 
-
 # %%
-# tabs
+tabs
+
 
 # %% [markdown]
 # #### Aj s `Tabs` môžeme odchytávať udalosti, budeme to využívať v nasledujúcom notebooku.
@@ -81,9 +81,9 @@ def print_observ(*events):
     for event in events:
         active_tab = event.new
         if active_tab == 0:
-            print("Observing hourly forecast")
+            print("Observing hourly forecast, Tab 0")
         else:
-            print("Observing daily forecast")
+            print("Observing daily forecast, Tab 1")
 
             
 # now we do not want 'value' , we want 'active'
@@ -113,4 +113,4 @@ widgets = pn.Column(m_options, view_current)
 
 # %%
 app = pn.Row(widgets, tabs)
-# app
+app

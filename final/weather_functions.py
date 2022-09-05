@@ -51,6 +51,8 @@ def one_call(city, autoupdate=60*60*4):
 
 # %%
 wkeys = ['clouds', 'rain', 'wind_speed', 'humidity', 'pressure', 'temp']
+sk_wkeys = {"Teplota": "temp", "Tlak": "pressure", "Oblaky": "clouds", 
+            "Vietor": "wind", "Zrážky": "rain", "Vlhkosť": "humidity"}
 
 
 # %%

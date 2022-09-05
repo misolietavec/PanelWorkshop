@@ -61,5 +61,3 @@ plugins.MarkerCluster(locations=loc, popups=pops).add_to(map_SK);
 # %% [markdown]
 # #### Máme dosť znalostí, aby sme pochopili dve jednoduché mapové funkcie [v notebooku working/map_functions](working/map_functions.ipynb).
 # #### Tie funkcie, `slovakia_map` a `choosen_onmap` sú pridané do `final/plot_functions` a odtiaľ ich budeme používať v [konečnej verzii aplikácie](working/weatherapp_map.ipynb).
-
-# %%
