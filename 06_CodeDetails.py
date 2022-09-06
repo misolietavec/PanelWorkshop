@@ -24,3 +24,8 @@
 # - videá s tým, čo sme tu robili (pre tých, čo nemohli, alebo si to chcú osviežiť) sú na 
 #   1. [https://feelmath.eu/PanelWorkshop/WeatherData.mp4](https://feelmath.eu/PanelWorkshop/WeatherData.mp4)
 #   2. [https://feelmath.eu/PanelWorkshop/PlotWeather.mp4](https://feelmath.eu/PanelWorkshop/PlotWeather.mp4)
+#   3. [https://feelmath.eu/PanelWorkshop/OneStation.mp4](https://feelmath.eu/PanelWorkshop/OneStation.mp4)
+#   4. [https://feelmath.eu/PanelWorkshop/ChooseMeteoData.mp4](https://feelmath.eu/PanelWorkshop/ChooseMeteoData.mp4)
+
+# %% [markdown]
+# # <font size=7><center>Howgh.</center></font>
