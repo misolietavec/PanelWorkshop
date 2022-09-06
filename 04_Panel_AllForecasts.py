@@ -13,7 +13,7 @@ observ_choice = pn.widgets.CheckBoxGroup(options=wkeys, value=['temp', 'clouds']
 
 def set_observ(*events):  
     for event in events:
-        if event.type == "changed" and len(event.new) > 3:
+        if event.type == "changed" and(len(event.new) > 3 or len(event.new) == 0):
             observ_choice.value = event.old
             
 observ_watcher = observ_choice.param.watch(set_observ, ['value'], onlychanged=True)
@@ -64,8 +64,8 @@ pn.Row(m_options, view_daily)
 tabs = pn.Tabs(
     ("Hourly", view_hourly),
     ("Daily", view_daily),
-    # pn.Row(pn.pane.Markdown("# Simple example of an 'ugly' tab name")),
-    dynamic=True,  # can prevent bugs (and headaches)
+    pn.Row(pn.pane.Markdown("# Simple example of an 'ugly' tab name")),
+    # dynamic=True,  # can prevent bugs (and headaches)
     tabs_location='above'  # options: 'left', 'right', 'above'
 )
 
@@ -90,6 +90,9 @@ def print_observ(*events):
 tabs_watcher = tabs.param.watch(print_observ, 'active', onlychanged=True)
 
 # %%
+tabs
+
+# %%
 tabs.param.unwatch(tabs_watcher)
 
 
@@ -106,7 +109,7 @@ def view_current(station_choice):
 
 # %%
 widgets = pn.Column(m_options, view_current)
-# widgets
+widgets
 
 # %% [markdown]
 # #### A nakoniec to spojiť dokopy
@@ -114,3 +117,5 @@ widgets = pn.Column(m_options, view_current)
 # %%
 app = pn.Row(widgets, tabs)
 app
+
+# %%

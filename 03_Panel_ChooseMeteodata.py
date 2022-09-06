@@ -58,13 +58,13 @@ observ_choice.value = ['temp']
 
 def set_observ(*events):  
     for event in events:
-        if event.type == "changed" and len(event.new) > 3:
+        if event.type == "changed" and (len(event.new) > 3 or len(event.new) == 0):
             observ_choice.value = event.old
             
 observ_watcher = observ_choice.param.watch(set_observ, ['value'], onlychanged=True)
 
 # %%
-# observ_watcher
+observ_choice
 
 # %%
 station_choice = pn.widgets.Select(name="Select a station", options=StaNames, width=200)
@@ -78,3 +78,5 @@ def view_hourly(station_choice, observ_choice):
 
 options = pn.Column(station_choice, observ_choice)
 pn.Row(options, view_hourly)
+
+# %%
