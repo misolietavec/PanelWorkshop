@@ -15,6 +15,7 @@
 # %% [markdown]
 # #### V tomto notebooku pridáme zobrazenie meteostaníc na mape, s vyznačenou vybranou stanicou.
 # #### Na to použijeme modul `folium` (iná možnosť - `ipyleaflet`), oba sú založené na [JS knižnici Leaflet](https://leafletjs.com/).
+# #### Mimochodom, o mapách v prehliadači bude [dnes o 14-tej mať vystúpenie Vojta Filipec](https://2022.pycon.sk/sk/speakers/Vojta%20Filipec.html)
 
 # %%
 # meteostations with geographic coordinates
@@ -26,7 +27,7 @@ from folium import plugins
 
 # %%
 # making map with folium: location is (lat, lon), zoom_start - initial map zoom
-# map_SK = folium.Map(location=[48.7, 19.6], zoom_start=8)
+map_SK = folium.Map(location=[48.7, 19.6], zoom_start=8)
 # map_SK
 
 # %%
@@ -35,8 +36,8 @@ from folium import plugins
 map_SK = folium.Map(location=[48.7, 19.6], zoom_start=8)
 for name in Stations_SK:
     # map_SK.add_child(folium.Marker(location=Stations_SK[name])) # simplest, but ?
-    map_SK.add_child(folium.CircleMarker(location=Stations_SK[name],))
-                                         # radius=6, tooltip=name, color="green", fill_color="blue"))
+    map_SK.add_child(folium.CircleMarker(location=Stations_SK[name],
+                                         radius=6, tooltip=name, color="green", fill_color="blue"))
 # map_SK
 
 # %% [markdown]
