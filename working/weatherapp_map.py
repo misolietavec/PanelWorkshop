@@ -90,8 +90,7 @@ tabs = pn.Tabs(("Predpoveď 48 hod.", pn.Column(view_hourly)), ("Predpoveď 8 dn
 def enable_observ(*events):
     for event in events:
         active_tab = event.new
-        if active_tab == 2:
-            observ_choice.disabled = True
+        observ_choice.disabled = (active_tab == 2)
 
 tabs_watcher = tabs.param.watch(enable_observ, 'active', onlychanged=True)
 
