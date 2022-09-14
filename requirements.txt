@@ -1,0 +1,6 @@
+jupyterlab
+folium
+panel
+sqlitedict
+plotly
+pandas
