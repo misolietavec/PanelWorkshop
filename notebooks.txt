@@ -1,7 +1,0 @@
-00_Data_Openweather        (vsetky funkcie pre ziskanie meteodat, hotove)
-01_Plotting_Weather        (plotly, bar a scatter ploty pre vybranu stanicu, subploty)
-02_Panel_OneStationPlots   (stanica_vyber, graf teploty 48 hod. v pn.Row, tri grafy - subploty)
-03_Panel_ChooseMeteodata   (stanica_vyber, merania_vyber, len 48 hod., obmedzenie na 3 polozky)
-04_Panel_AllForecasts      (pridat taby, pre 48 hod a 8 dni, current pod widgets)
-05_WeatherMap              (vsetky a vybrana stanica na mape, novy tab)
-06_CodeDetails             (funkcie priblizime k nasim, perzistencia, len ak ostane cas)
