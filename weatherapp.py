@@ -20,8 +20,8 @@ import panel as pn
 import panel.widgets as pnw
 
 from plotly.subplots import make_subplots
-from final.weather_functions import get_weather, StaNames
-from final.plot_functions import plot_forecasts, choosen_onmap
+from weather_functions import get_weather, StaNames
+from plot_functions import plot_forecasts, choosen_onmap
 
 pn.extension('plotly')
 

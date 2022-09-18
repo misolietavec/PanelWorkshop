@@ -20,7 +20,7 @@ import folium
 from folium import plugins
 import json
 import os
-import final.weather_functions as wf
+import weather_functions as wf
 
 # %%
 w_colors = {'clouds': 'green', 'rain': 'darkblue', 'wind_speed': 'blue', 
